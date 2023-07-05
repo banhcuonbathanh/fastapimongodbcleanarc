@@ -11,6 +11,7 @@ user_router = APIRouter()
 
 @user_router.post('/create', summary="Create new user ", response_model=UserOut)
 async def create_user(data: UserAuth):
+    print("this is handler create user")
     try:
         return await UserService.create_user(data)
     except pymongo.errors.DuplicateKeyError:
@@ -28,6 +29,10 @@ async def get_me(user: User = Depends(get_current_user)):
 
 @user_router.post('/update', summary='Update User', response_model=UserOut)
 async def update_user(data: UserUpdate, user: User = Depends(get_current_user)):
+    print('data')
+    print(data)
+    print('user')
+    print(user)
     try:
         return await UserService.update_user(user.user_id, data)
     except pymongo.errors.OperationFailure:

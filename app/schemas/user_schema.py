@@ -8,6 +8,10 @@ class UserAuth(BaseModel):
     username: str = Field(..., min_length=5, max_length=50, description="user username")
     password: str = Field(..., min_length=5, max_length=24, description="user password")
     
+class UserLogin(BaseModel):
+    email: EmailStr = Field(..., description="user email")
+  
+    password: str = Field(..., min_length=5, max_length=24, description="user password")
 
 class UserOut(BaseModel):
     user_id: UUID
